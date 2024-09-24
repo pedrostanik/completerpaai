@@ -1,13 +1,22 @@
 from bs4 import BeautifulSoup
 import requests
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
 
 url = "https://www.gsuplementos.com.br/"
 driver = webdriver.Chrome()
+wait = WebDriverWait(driver, 20)
 driver.get(url)
 
-time.sleep(30)
+search = wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="buscaCabecalho"]/form/input')))
+time.sleep(5)
+search.send_keys('whey')
+botao = wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="buscaCabecalho"]/form/div[1]/button')))
+botao.click()
+time.sleep(6)
 
 html_content = driver.page_source
 
