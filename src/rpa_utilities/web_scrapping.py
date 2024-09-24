@@ -54,6 +54,12 @@ class WebScrapping():
             link_produto = produto['href']
             
             print(f"Nome do produto: {nome_produto}, Link: {link_produto}")
+            temp_driver = webdriver.Chrome()
+            temp_url = str(url + link_produto[1:])
+            temp_driver.get(temp_url)
+            time.sleep(5)
+            produto_detalhes = soup.find_all('div', class_="tabelaNutricional-table")
+            print(f'produtos_detalhes: {produto_detalhes}')
             produtos_list.append(nome_produto)
         
         produtos_dict["produtos"] = produtos_list
